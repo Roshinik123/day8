@@ -96,7 +96,7 @@ typedef struct node
     int data;
     struct node *next;
 }NODE;
-NODE *newnode,*tptr,*shadow,*start=NULL,*count=0;
+NODE *newnode,*tptr,*shadow,*start=NULL;
 void insert(int num)
 {
 newnode=(NODE*)malloc(sizeof(NODE));
@@ -127,6 +127,7 @@ void deletenode(int num)
 }
 void search(int num)
 {
+int count=0;
 for(tptr=start;tptr;tptr=tptr->next){
    if(tptr->data==num)
         count++;
