@@ -88,3 +88,64 @@ deletenode(10);
 display();
 return 0;
 }
+3.search
+#include<stdio.h>
+#include<malloc.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+}NODE;
+NODE *newnode,*tptr,*shadow,*start=NULL,*count=0;
+void insert(int num)
+{
+newnode=(NODE*)malloc(sizeof(NODE));
+newnode->data = num;
+newnode->next = NULL;
+for(tptr=start;tptr;shadow=tptr,tptr=tptr->next);
+    if(tptr==start)
+{
+    newnode->next=start;
+    start=newnode;
+}
+else
+{
+    newnode->next=shadow->next;
+    shadow->next=newnode;
+}
+}
+void deletenode(int num)
+{
+    for(tptr=start;tptr&&tptr->data!=num;shadow=tptr,tptr=tptr->next);
+    if(tptr==NULL)
+   printf("nothing to delete");
+   else if(start==tptr)
+   free(tptr);
+   else 
+   shadow->next=tptr->next;
+   free(tptr);
+}
+void search(int num)
+{
+for(tptr=start;tptr;tptr=tptr->next){
+   if(tptr->data==num)
+        count++;
+}
+      if(count!=0)
+      printf("%d data is found",num);
+      else
+      printf("data is not found");
+}
+void display()
+{
+    for(tptr=start;tptr;tptr=tptr->next)
+        printf("%d->",tptr->data);
+}
+int main()
+{
+insert(20);
+insert(10);
+insert(15);
+search(10);
+return 0;
+}
