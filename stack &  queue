@@ -1,0 +1,58 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#define size 4
+int s1[size],s2[size],top1=-1,top2=-1,count=0;
+void push1(int num)
+{
+    top1++;
+    s1[top1]=num;
+}
+void push2(int num)
+{
+    top2++;
+    s2[top2]=num;
+}
+int pop1()
+{
+    return s1[top1--];
+}
+int pop2()
+{
+    return s2[top2--];
+}
+void enqueue(int num)
+{
+    push1(num);
+    count++;
+}
+void display()
+{
+    for(int i=0;i<count;i++)
+    printf("%d",s1[i]);
+    printf("\n");
+}
+void dequeue()
+{
+    for(int i=0;i<count;i++)
+    {
+        int temp1=pop1();
+        push2(temp1);
+    }
+    int temp2=pop2();
+    printf("dequeued element is %d\n",temp2);
+    count--;
+    for(int i=0;i<count;i++)
+    {
+        int temp=pop2();
+        push1(temp);
+    }
+}
+int main() {
+    enqueue(5);
+    enqueue(2);
+    enqueue(1);
+    display();
+    dequeue();
+    enqueue(7);
+    display();
+}
